@@ -1,3 +1,5 @@
+// code author: Krishna Moni Das, das694272@gmail.com
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import StackNavigator from './navigation/StackNavigator';
