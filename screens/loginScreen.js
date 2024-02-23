@@ -15,7 +15,7 @@ const loginScreen = () => {
         <SafeAreaView style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}>
             <View>
                 <Image
-                    style={{ width: 250, height: 250, marginTop: 50 }}
+                    style={{ width: 250, height: 250, marginTop: 10 }}
                     source={{
                         uri: "https://avatars.githubusercontent.com/u/144059935?v=4",
                     }}
