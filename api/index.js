@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const jwt = require("jsonwebtoken");
+const { error } = require("console");
 
 mongoose.connect("mongodb+srv://das694272:krishnamonidas@cluster0.nm8gpsj.mongodb.net/", {
     useNewUrlParser: true,
@@ -29,3 +30,51 @@ app.listen(port,()=>{
     console.log("Server is running on port 8000");
 });
 
+
+
+const User = require("../api/models/user");
+const Order = require("../api/models/order");
+
+
+const sendVerificationEmail = async (email, verficationToken) =>{
+    const transporter = nodemailer.createTransport({
+        service:"gmail",
+        auth:{
+            user:"krishnamonidas.adtu@gmail.com",
+            pass:"fcar nnky nrjt htig "
+        }
+    })
+    const mailOptions={
+        from:"google.com",
+        to:email,
+        subject:"Verify Email",
+        text:`Click the following link to verify the mail http://localhost:8000/verify/${verficationToken}`,
+    };
+    try{
+        await transporter.sendMail(mailOptions)
+    }catch(error){
+        console.log("Can not send verification Email ",error);
+    }
+}
+
+
+
+app.post("/register",async(req,res)=>{
+    try{
+        const {name,email,password}=req.body;
+
+        const existingUser = await User.findOne({email});
+        if(existingUser){
+            return res.status(400).json({message:"This email is already registered with an account"});
+        }
+
+        const newUser = new User({name, email, password});
+        newUser.verficationToken=crypto.randomBytes(20).toString("hex");
+        await newUser.save();
+
+        sendVerificationEmail(newUser.email,newUser.verficationToken)
+    }catch{
+        console.log("Oops! Error when registering ",error);
+        res.status(500).json({message:"Your registration failed, try again after some time"})
+    }
+})

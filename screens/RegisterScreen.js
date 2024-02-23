@@ -102,7 +102,7 @@ const RegisterScreen = () => {
 
                 <Pressable style={{ width: 200, backgroundColor: "#4BA456", borderRadius: 6, marginLeft: "auto", marginRight: "auto",padding:15 }}>
                     <Text style={{ color: "white" , textAlign:"center", fontSize:16, fontweight:"bold"}}>
-                        Login
+                        Register now
                     </Text>
                 </Pressable>
 
