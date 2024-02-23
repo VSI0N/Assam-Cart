@@ -78,3 +78,21 @@ app.post("/register",async(req,res)=>{
         res.status(500).json({message:"Your registration failed, try again after some time"})
     }
 })
+
+
+app.get("/verify/:token",async(req,res)=>{
+    try{
+        const token = req.params.token;
+        const user=await User.findOne({verficationToken: token});
+        if(!user){
+            return res.status(404).json({message:"Bad verification token"});
+        }
+        user.verified=true;
+        user.verficationToken=undefined;
+        await user.save();
+
+        res.status(200).json({message:"Email is verified"})
+    }catch(error){
+    res.status(500).json({ message:"Problem when verifying Email"});
+}
+})

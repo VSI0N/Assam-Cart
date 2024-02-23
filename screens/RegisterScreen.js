@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, KeyboardAvoidingView, TextInput, Pressable } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Image, KeyboardAvoidingView, TextInput, Pressable, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { Entypo } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 
 const RegisterScreen = () => {
@@ -12,6 +13,25 @@ const RegisterScreen = () => {
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
     const [name,setName] = useState("");
+
+    const handleRegister = () =>{
+        const user={
+            name:name,
+            email:email,
+            password:password,
+        };
+        axios.post("http://localhost:8000/register",user).then((response)=>{
+            console.log(response);
+            Alert.alert("Successfully Registered!","Your registration have completed!");
+            setName("");
+            setPassword("");
+            setEmail("");
+        }).catch((error)=>{
+            Alert.alert("Registration failed","Error during registration");
+            console.log("registration failed",error);
+        })
+        
+    };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}>
@@ -100,7 +120,9 @@ const RegisterScreen = () => {
 
                 <View style={{ marginTop: 20 }} />
 
-                <Pressable style={{ width: 200, backgroundColor: "#4BA456", borderRadius: 6, marginLeft: "auto", marginRight: "auto",padding:15 }}>
+                <Pressable 
+                onPress={handleRegister}
+                style={{ width: 200, backgroundColor: "#4BA456", borderRadius: 6, marginLeft: "auto", marginRight: "auto",padding:15 }}>
                     <Text style={{ color: "white" , textAlign:"center", fontSize:16, fontweight:"bold"}}>
                         Register now
                     </Text>
