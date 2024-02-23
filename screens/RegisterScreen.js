@@ -41,13 +41,13 @@ const RegisterScreen = () => {
                             backgroundColor: "#D0D0D0",
                             paddingVertical: 5,
                             borderRadius: 5,
-                            marginTop: 20
+                            marginTop: 10
                         }}>
                         <AntDesign style={{ marginLeft: 10 }} name="user" size={24} color="black" />
                         <TextInput
                             value={name}
                             onChangeText={(text) => setName(text)}
-                            style={{ color: "gray", marginVertical: 10, width: 300, marginLeft: 10, fontSize: password ? 16 : 16 }}
+                            style={{ color: "gray", marginVertical: 10, width: 300, marginLeft: 10, fontSize: name ? 16 : 16 }}
                             placeholder='Enter your Name' />
                     </View>
 
