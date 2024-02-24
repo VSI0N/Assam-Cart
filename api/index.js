@@ -41,7 +41,7 @@ const sendVerificationEmail = async (email, verficationToken) =>{
         service:"gmail",
         auth:{
             user:"krishnamonidas.adtu@gmail.com",
-            pass:"fcar nnky nrjt htig "
+            pass:"fcar nnky nrjt htig"
         }
     })
     const mailOptions={

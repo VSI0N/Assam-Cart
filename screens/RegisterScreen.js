@@ -113,6 +113,7 @@ const RegisterScreen = () => {
 
                     <View style={{ marginTop: 12, flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                         <Text>Stay logged in</Text>
+                        <Text style={{ color: "#007FFF", fontWeight: "500"}}>Browse the Shop</Text>
                         <Text style={{ color: "#007FFF", fontWeight: "500" }}>Forgot Password ?</Text>
                     </View>
 
